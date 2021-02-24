@@ -52,64 +52,64 @@ To launch the client, open the terminal, and run the following commands:
 
 Each command(according to it's description) can be executed by either of the following clients: Anonymous user, Admin user, Student user. If a client tries to execute a command that is not under his type(for example, an admin user tries to execute a student user-only command), an ERR message will be returned.
 
-0. SHOWCOMMANDS
+0- SHOWCOMMANDS
 This command can be executed by any user.
 This command does not interact with the server, and provides the list of the supported commands.
 
-1. ADMINREG
+1- ADMINREG
 An anonymous user command.
 An ADMINREG message is used to register an admin in the service. If the username is already registered in the server, an
 ERR message is returned. If successful an ACK message will be sent in return.
 
 Parameters:
 
-Opcode: 1.
+Opcode: 1
 Username: The username to register in the server.
 Password: The password for the current username (used to log in to the server).
 
 Command initiation:
 This command is initiated by entering the following text in the client command line interface: ADMINREG  <Username> <Password>
 
-2. STUDENTREG
+2- STUDENTREG
 An anonymous user command.
 A STUDENTREG message is used to register a student in the service. If the username is already registered in the server, an ERROR message is
 returned. If successful an ACK message will be sent in return.
 
 Parameters:
 
-Opcode: 2.
+Opcode: 2
 Username: The username to register in the server.
 Password: The password for the current username (used to log in to the server).
 
 Command initiation:
 This command is initiated by entering the following text in the client command line interface: STUDENTREG  <Username> <Password>
 
-3. LOGIN
+3- LOGIN
 An anonymous user command.
 A LOGIN message is used to login a user into the server. If the user doesn’t exist or the password doesn’t match the one entered for the
 username, sends an ERROR message. An ERROR message should also appear if the current client has already successfully logged in.
 
 Parameters:
-Opcode: 3.
+Opcode: 3
 Username: The username to log in the server.
 Password: The password for the current username (used to log in to the server)	     
 
 Command initiation:
 This command is initiated by entering the following text in the client command line interface: LOGIN <Username> <Password>
 
-4. LOGOUT
+4- LOGOUT
 This command can be executed by both student and admin users. 
 Informs the server on client disconnection. A client terminates only after receiving an ACK message in replay. If no user is logged in, sends
 an ERROR message.
 
 Parameters:
-Opcode: 4.
+Opcode: 4
 
 Command initiation:
 This command is initiated by entering the following text in the client command line interface: LOGOUT
 Once the ACK command is received in the client, it terminates itself.
 
-5. COURSEREG
+5- COURSEREG
 A student user command.
 Inform the server about the course the student want to register to, if the registration done successfully, an ACK message will be sent back to the client, otherwise, (e.g. no such course is exist, no seats are available in this course, the student does not have all the Kdam courses, the student is not logged in) ERR message will be sent back. (Note: the admin can’t register to courses, in case the admin sends a COURSEREG message, and ERR message will be sent back to the client).
 
@@ -120,20 +120,20 @@ Course Number: the number of the course the student wants to register to.
 Command initiation:
 This command is initiated by entering the following text in the client command line interface: COURSEREG <CourseNum>
 
-6. KDAMCHECK
+6- KDAMCHECK
 A student user command.
 this message checks what are the KDAM courses of the specified course.
 If student registered to a course successfully, we consider him having this course as KDAM.
 
 Parameters:
-Opcode: 6.
+Opcode: 6
 Course Number: the number of the course the user needs to know its KDAM courses
 When the server gets the message it returns the list of the KDAM courses(if there are now KDAM courses it returns an empty string).
 
 Command initiation:
 This command is initiated by entering the following texts in the client command line interface: KDAMCHECK <CourseNumber>
 
-7. COURSESTAT
+7- COURSESTAT
 An Admin user command.
 The admin sends this message to the server to get the state of a specific course.
 
@@ -155,7 +155,7 @@ Course Number: the number of the course we want the state of.
 Command initiation:
 This command is initiated by entering the following texts in the client command line interface: COURSESTAT <courseNum>
 
-8. STUDENTSTAT
+8- STUDENTSTAT
 An admin user command.
 A STUDENTSTAT message is used to receive a status about a specific student.
 
@@ -168,49 +168,45 @@ Student: hhhaddock
 Courses: [42] // if the student hasn’t registered to any course yet, simply prints []
 
 Parameters:
-Opcode: 8.
+Opcode: 8
 
 Command initiation:
 This command is initiated by entering the following texts in the client command line interface: STUDENTSTAT <StudentUsername>
 
-9. ISREGISTERED
+9- ISREGISTERED
 A student user command.
 An ISREGISTERED message is used to know if the student is registered to the specified course.
 The server sends back “REGISTERED” if the student is already registered to the course,
 otherwise, it sends back “NOT REGISTERED”.
 
 Parameters:
-Opcode: 9.
+Opcode: 9
 Course Number: The number of the course the student wants to check.
 
 Command initiation:
 This command is initiated by entering the following texts in the client command line interface: ISREGISTERED <courseNum>
 
-10. UNREGISTER
+10- UNREGISTER
 A student user command.
 An UNREGISTER message is used to unregister to a specific course.
 The server sends back an ACK message if the registration process successfully done, otherwise, it sends back an ERR message.
 
 Parameters:
-Opcode: 10.
+Opcode: 10
 Course Number: The number of the course the student wants to unregister to.
 Command initiation:
 This command is initiated by entering the following texts in the client command line interface: UNREGISTER <courseNum>
 
-11. MYCOURSES
+11- MYCOURSES
 A student user command.
 A MYCOURSES message is used to know the courses the student has registered to.
 The server sends back a list of the courses number(in the format:[<coursenum1>,<coursenum2>]) that the student has registered to (could be empty []).
 
 Parameters:
-Opcode: 11.
+Opcode: 11
 
 Command initiation:
 This command is initiated by entering the following texts in the client command line interface: MYCOURSES
-
-
-
-
 
 
 

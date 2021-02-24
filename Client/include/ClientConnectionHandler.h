@@ -14,6 +14,9 @@ using boost::asio::ip::tcp;
 
 class ClientConnectionHandler {
 private:
+    bool invalidCommand();
+    bool isValidInt(std::string & data);
+    bool isValidString(int numOfStrings, std::string & data);
     const std::string host_;
     const short port_;
     boost::asio::io_service io_service_;   // Provides core I/O functionality

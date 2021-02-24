@@ -157,7 +157,7 @@ bool ClientConnectionHandler::sendMessage(string &msg) {
         return !shouldTerminate;
     }
 
-    else if (((opCode < 5) | (opCode ==8)) | (opCode > 10)){//message contains string
+    else if (((opCode < 4) | (opCode ==8)) | (opCode > 10)){//message contains string
         //spaces will be replaced later with matching opCode and '\0'
         data = "  " + data + " ";
         toSend = new char[data.size()];
@@ -167,13 +167,21 @@ bool ClientConnectionHandler::sendMessage(string &msg) {
         int space = data.substr(2).find_first_of(' ') + 2;//finds first space index
         int endIndex = data.size() - 1;
 
-        if (space < endIndex) {//space between username and password
-            toSend[space] = '\0';//replace space
+        if (opCode < 4){
+            if (space >= endIndex){//no password provided
+                return invalidCommand();
+            }
+            else {//space between username and password
+                toSend[space] = '\0';//replace space
+            }
         }
         toSend[data.size() - 1] = '\0';//replace space
     }
 
     else{//message should include courseNum
+        if (!isValidInt(data)){
+            return invalidCommand();
+        }
         courseNum = stoi(data);//convert string to short
         toSend = new char[4];//2 bytes for opCode and 2 for CourseNum
         shortToChars(courseNum, toSend, 2);
@@ -218,4 +226,22 @@ bool ClientConnectionHandler::getMessage() {
 void ClientConnectionHandler::shortToChars(short num, char* arr, int begin) {
     arr[begin] = (num >> 8) & 0xFF;
     arr[begin + 1] = num & 0xFF;
+}
+
+bool ClientConnectionHandler::invalidCommand() {
+    std::cout << "INVALID COMMAND" << std::endl;
+    return !shouldTerminate;
+}
+
+bool ClientConnectionHandler::isValidInt(std::string & data) {
+    int size = data.size();
+    if (size == 0){//empty string
+        return false;
+    }
+    for (int i = 0; i < size; i++) {
+        if ((data.at(i) > '9') || data.at(i) < '0'){
+            return false;
+        }
+    }
+    return true;
 }

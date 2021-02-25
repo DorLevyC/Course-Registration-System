@@ -16,33 +16,33 @@ Clone the files to a destinated folder of your wish. We will refer to this locat
 
 (The following steps are not mandatory if you choose to run the code on IDE)
 To launch the server, open the terminal, and run the following commands:
-	1. cd {installation home}/server
-	2. mvn clean
-	3. mvn compile
-	4. mvn exec:java -Dexec.mainClass="bgu.spl.net.impl.BGRSServer.ReactorMain" -Dexec.args="<port> 5"
-	   (where port is a 4 digit number, which represents the port on your computer that the server will run on)
+1. cd {installation home}/server
+2. mvn clean
+3. mvn compile
+4. mvn exec:java -Dexec.mainClass="bgu.spl.net.impl.BGRSServer.ReactorMain" -Dexec.args="(port) 5"
+   (where port is a 4 digit number, which represents the port on your computer that the server will run on)
 
 To launch the client, open the terminal, and run the following commands:
-	1. cd {installation home}/client
-	2. make clean
-	3. make
-	4. bin/BGRSclient <ip> <port>
-	   (where <ip> and <port> are the matching ip and port that your server runs on)
+1. cd {installation home}/client
+2. make clean
+3. make
+4. bin/BGRSclient "ip" "port"
+   (where (ip) and (port) are the matching ip adress and port that your server runs on)
 
 # Command description
 
 	List of the supported commands:
 	0: SHOWCOMMANDS
-	1: ADMINREG <username> <password>
-	2: STUDENTREG <username> <password>
-	3: LOGIN <username> <password>
+	1: ADMINREG (username) (password)
+	2: STUDENTREG (username) (password)
+	3: LOGIN (username) (password)
 	4: LOGOUT
-	5: COURSEREG <coursenum>
-	6: KDAMCHECK <coursenum>
-	7: COURSESTAT <coursenum>
-	8: STUDENTSTAT <username>
-	9: ISREGISTERED <coursenum>
-	10: UNREGISTER <coursenum>
+	5: COURSEREG (coursenum)
+	6: KDAMCHECK (coursenum)
+	7: COURSESTAT (coursenum)
+	8: STUDENTSTAT (coursenum)
+	9: ISREGISTERED (coursenum)
+	10: UNREGISTER (coursenum)
 	11: MYCOURSES
 
 	Users description:
@@ -77,7 +77,7 @@ Password: The password for the current username (used to log in to the server).
 
 Command initiation:
 
-This command is initiated by entering the following text in the client command line interface: 	ADMINREG  <Username> <Password>
+This command is initiated by entering the following text in the client command line interface: ADMINREG (Username) (Password)
 
 
 2- STUDENTREG
@@ -97,7 +97,7 @@ Password: The password for the current username (used to log in to the server).
 
 Command initiation:
 
-This command is initiated by entering the following text in the client command line interface: STUDENTREG  <Username> <Password>
+This command is initiated by entering the following text in the client command line interface: STUDENTREG (Username) (Password)
 
 
 3- LOGIN
@@ -112,11 +112,11 @@ Opcode: 3
 
 Username: The username to log in the server.
 
-Password: The password for the current username (used to log in to the server)	     
+Password: The password for the current username (used to log in to the server)
 
 
 Command initiation:
-This command is initiated by entering the following text in the client command line interface: 	LOGIN <Username> <Password>
+This command is initiated by entering the following text in the client command line interface: LOGIN (Username) (Password)
 
 
 4- LOGOUT
@@ -150,7 +150,7 @@ Course Number: the number of the course the student wants to register to.
 
 
 Command initiation:
-This command is initiated by entering the following text in the client command line interface: 	COURSEREG <CourseNum>
+This command is initiated by entering the following text in the client command line interface: COURSEREG (CourseNum)
 
 
 6- KDAMCHECK
@@ -167,7 +167,7 @@ Course Number: the number of the course the user needs to know its KDAM courses.
 
 
 Command initiation:
-This command is initiated by entering the following texts in the client command line interface: 	KDAMCHECK <CourseNumber>
+This command is initiated by entering the following texts in the client command line interface: KDAMCHECK (CourseNumber)
 
 
 7- COURSESTAT
@@ -177,11 +177,11 @@ The admin sends this message to the server to get the state of a specific course
 
 The client prints the state of the course as followed:
 
-	Course: (<courseNum>) <courseName>
+Course: (courseNum) courseName
 
-	Seats Available: <numOfSeatsAvailable> / <maxNumOfSeats>
+Seats Available: numOfSeatsAvailable / maxNumOfSeats
 
-	Students Registered: <listOfStudents> //ordered alphabetically
+Students Registered: listOfStudents           //ordered alphabetically
 
 
 Example:
@@ -202,7 +202,7 @@ Course Number: the number of the course we want the state of.
 
 Command initiation:
 
-This command is initiated by entering the following texts in the client command line interface: 	COURSESTAT <courseNum>
+This command is initiated by entering the following texts in the client command line interface: COURSESTAT (courseNum)
 
 
 8- STUDENTSTAT
@@ -212,15 +212,15 @@ A STUDENTSTAT message is used to receive a status about a specific student.
 
 The client prints the state of the course as followed:
 
-	Student: <studentUsername>
+Student: (studentUsername)
 
-	Courses: <listOfCoursesNumbersStudentRegisteredTo>
+Courses: (listOfCoursesNumbersStudentRegisteredTo)
 
 Example:
 
-	Student: hhhaddock
+Student: hhhaddock
 
-	Courses: [42] // if the student hasn’t registered to any course yet, simply prints []
+Courses: [42] // if the student hasn’t registered to any course yet, simply prints []
 
 Parameters:
 
@@ -229,7 +229,7 @@ Opcode: 8
 
 Command initiation:
 
-This command is initiated by entering the following texts in the client command line interface: 	STUDENTSTAT <StudentUsername>
+This command is initiated by entering the following texts in the client command line interface: STUDENTSTAT (StudentUsername)
 
 
 9- ISREGISTERED
@@ -248,7 +248,7 @@ Course Number: The number of the course the student wants to check.
 
 Command initiation:
 
-This command is initiated by entering the following texts in the client command line interface: 	ISREGISTERED <courseNum>
+This command is initiated by entering the following texts in the client command line interface: ISREGISTERED (courseNum)
 
 
 10- UNREGISTER
@@ -265,14 +265,14 @@ Course Number: The number of the course the student wants to unregister to.
 
 
 Command initiation:
-This command is initiated by entering the following texts in the client command line interface: 	UNREGISTER <courseNum>
+This command is initiated by entering the following texts in the client command line interface: UNREGISTER (courseNum)
 
 
 11- MYCOURSES
 
 A student user command.
 A MYCOURSES message is used to know the courses the student has registered to.
-The server sends back a list of the courses number(in the format:[coursenum1,coursenum2]) that the student has registered to (could be empty []).
+The server sends back a list of the courses number(in the format:[(coursenum1),(coursenum2)]) that the student has registered to (could be empty []).
 
 Parameters:
 
